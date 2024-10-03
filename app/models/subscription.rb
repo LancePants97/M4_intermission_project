@@ -4,7 +4,6 @@ class Subscription < ApplicationRecord
 
   validates :tier, presence: true
   validates :price, presence: true
-  validates :status, presence: true
   validates :frequency, presence: true
 
   enum tier: { bronze: 0, silver: 1, gold: 2 }
