@@ -15,12 +15,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_03_221807) do
   enable_extension "plpgsql"
 
   create_table "customer_subscriptions", force: :cascade do |t|
-    t.bigint "customers_id", null: false
-    t.bigint "subscriptions_id", null: false
+    t.bigint "customer_id", null: false
+    t.bigint "subscription_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["customers_id"], name: "index_customer_subscriptions_on_customers_id"
-    t.index ["subscriptions_id"], name: "index_customer_subscriptions_on_subscriptions_id"
+    t.index ["customer_id"], name: "index_customer_subscriptions_on_customer_id"
+    t.index ["subscription_id"], name: "index_customer_subscriptions_on_subscription_id"
   end
 
   create_table "customers", force: :cascade do |t|
@@ -50,6 +50,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_03_221807) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "customer_subscriptions", "customers", column: "customers_id"
-  add_foreign_key "customer_subscriptions", "subscriptions", column: "subscriptions_id"
+  add_foreign_key "customer_subscriptions", "customers"
+  add_foreign_key "customer_subscriptions", "subscriptions"
 end
