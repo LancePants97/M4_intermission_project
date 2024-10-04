@@ -15,4 +15,16 @@ class Api::V0::CustomerSubscriptionsController < ApplicationController
       render json: { "errors": "Could Not Create Subscription" }, status: 400
     end
   end
+
+  def update
+    sub = CustomerSubscription.find(params[:id])
+    sub.unsubscribe
+    render json: CustomerSubscription.update(params[:id], subscription_params)
+    # binding.pry
+  end
+
+  private
+  def subscription_params
+    params.require(:customer_subscription).permit(:status)
+  end
 end
