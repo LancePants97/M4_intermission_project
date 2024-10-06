@@ -7,5 +7,5 @@ class Subscription < ApplicationRecord
   validates :frequency, presence: true
 
   enum tier: { bronze: 0, silver: 1, gold: 2 }
-  enum frequency: {  weekly: 0, monthly: 1 }
+  enum frequency: { weekly: 0, monthly: 1 }
 end

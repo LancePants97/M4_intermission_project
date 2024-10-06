@@ -9,6 +9,29 @@ RUN ALL TESTS
 - In terminal: run: "bundle exec rspec"
 - In terminal: run: "open coverage/index.html"
 
+--- SCHEMA ---
+"Customers" Table:
+first_name
+last_name
+email
+address
+
+"Subscriptions" Table:
+tier (enum tier: { bronze: 0, silver: 1, gold: 2 })
+price
+frequency (enum frequency: { weekly: 0, monthly: 1 })
+
+"CustomerSubscriptions" Table:
+customer_id
+subscription_id
+status (enum status: { inactive: 0, active: 1 })
+
+"Teas" Table:
+name
+description
+temperature
+brew_time
+
 --- ENDPOINTS ---
 
 ENDPOINT 1: Subscribe a customer to a tea subscription
