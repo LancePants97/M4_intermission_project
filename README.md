@@ -39,7 +39,7 @@ ENDPOINT 1: Subscribe a customer to a tea subscription
 - Must include customer and subscriber attributes in body for a response. Examples below
 Body: 
 { 
-  customer: 
+  "customer": 
     { 
       "id": customer.id,
       "first_name": "Shaggy",
@@ -47,7 +47,7 @@ Body:
       "email": "shaggy@mysteryinc.com",
       "address": "1234 Street st. Point Pleasant, NJ"
     },
-  subscription:
+  "subscription":
     {
       "id": subscription.id,
       "tier": 1,
