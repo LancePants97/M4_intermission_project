@@ -31,7 +31,7 @@ RSpec.describe "Customer Subscription Creation Request", type: :request do
     expect(@customer3.subscriptions.count).to eq(0)
 
     json = JSON.parse(response.body, symbolize_names: true)[:data]
-    
+
     expect(json).to have_key(:type)
     expect(json[:type]).to eq("customer_subscriptions")
     

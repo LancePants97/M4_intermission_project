@@ -1,9 +1,23 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+Customer.destroy_all
+Subscription.destroy_all
+CustomerSubscription.destroy_all
+
+# CREATE SOME CUSTOMERS
+customer1 = Customer.create!(first_name: "Bob", last_name: "Bobertson", email: "Bobbuilder.com", address: "1234 Road st. Denver, CO")
+customer2 = Customer.create!(first_name: "Shaggy", last_name: "Mystery", email: "shaggymysteryinc.com", address: "1234 Street st. Point Pleasant, NJ")
+customer3 = Customer.create!(first_name: "Scooby", last_name: "Doo", email: "scoobymysteryinc.com", address: "1234 Street st. Point Pleasant, NJ")
+
+# CREATE ALL POSSIBLE SUBSCRIPTION OPTIONS
+subscription1 = Subscription.create!(tier: 0, price: 5.99, frequency: 0)
+subscription2 = Subscription.create!(tier: 1, price: 10.99, frequency: 0)
+subscription3 = Subscription.create!(tier: 2, price: 15.99, frequency: 0)
+
+subscription4 = Subscription.create!(tier: 0, price: 5.99, frequency: 1)
+subscription5 = Subscription.create!(tier: 1, price: 10.99, frequency: 1)
+subscription6 = Subscription.create!(tier: 2, price: 15.99, frequency: 1)
+
+# CREATE 3 SUBSCRIPTIONS FOR CUSTOMER2
+customer_subscription1 = CustomerSubscription.create!(customer: customer2, subscription: subscription1, status: "active")
+customer_subscription2 = CustomerSubscription.create!(customer: customer2, subscription: subscription2, status: "inactive")
+customer_subscription3 = CustomerSubscription.create!(customer: customer2, subscription: subscription3, status: "active")
+
