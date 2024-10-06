@@ -17,25 +17,37 @@ RSpec.describe "Customer Subscription Creation Request", type: :request do
     @subscription6 = Subscription.create!(tier: 2, price: 15.99, frequency: 1)
   
   # CREATE A SUBSCRIPTION FOR A CUSTOMER
+    @customer_subscription = CustomerSubscription.create!(customer: @customer2, subscription: @subscription2)
   end
 
   it "can cancel a customer's subscription" do
-    customer_subscription = CustomerSubscription.create!(customer: @customer2, subscription: @subscription2)
     headers = {"CONTENT_TYPE" => "application/json"}
     body = {
       "customer_id": @customer2.id,
       "subscription_id": @subscription2.id,
       "status": "inactive"
     }
-    expect(customer_subscription.status).to eq("active")
 
-    patch "/api/v0/customer_subscriptions/#{customer_subscription.id}", headers: headers, params: JSON.generate({ customer_subscription: body })
-    
-    updated_sub = CustomerSubscription.find_by(id: customer_subscription.id)
+    expect(@customer_subscription.status).to eq("active")
+
+    patch "/api/v0/customer_subscriptions/#{@customer_subscription.id}", headers: headers, params: JSON.generate({ customer_subscription: body })
     expect(response).to be_successful
 
+    updated_sub = CustomerSubscription.find_by(id: @customer_subscription.id)
+
     expect(updated_sub.status).to eq("inactive")
+    expect(@customer_subscription.status).to_not eq(updated_sub.status)
+
     json = JSON.parse(response.body, symbolize_names: true)
-    # binding.pry
-  end
+    expect(json).to be_a(Hash)
+
+    expect(json).to have_key(:status)
+    expect(json[:status]).to eq("inactive")
+
+    expect(json).to have_key(:customer_id)
+    expect(json[:customer_id]).to eq(@customer2.id)
+
+    expect(json).to have_key(:subscription_id)
+    expect(json[:subscription_id]).to eq(@subscription2.id)
+  end 
 end

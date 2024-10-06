@@ -53,7 +53,7 @@ RSpec.describe "Customer Subscription Creation Request", type: :request do
     expect(json).to have_key(:id)
     expect(json[:id]).to be_an(Integer)
     expect(json[:id]).to eq(customer_subscription.id)
-
+### ---------------------------
     expect(json[:attributes]).to have_key(:customer)
     expect(json[:attributes][:customer]).to be_a(Hash)
 
@@ -81,7 +81,7 @@ RSpec.describe "Customer Subscription Creation Request", type: :request do
     expect(json[:attributes][:customer][:first_name]).to eq(@customer2.first_name)
     expect(json[:attributes][:customer][:first_name]).to_not eq(@customer1.first_name)
     expect(json[:attributes][:customer][:first_name]).to_not eq(@customer3.first_name)
-
+### ---------------------------
     expect(json[:attributes]).to have_key(:subscription)
     expect(json[:attributes][:subscription]).to be_a(Hash)
 
